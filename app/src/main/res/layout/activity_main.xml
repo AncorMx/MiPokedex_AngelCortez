@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/mew_pink"
+    tools:context=".MainActivity">
+
+    <ImageView
+        android:id="@+id/iv_pokeball"
+        android:layout_width="350dp"
+        android:layout_height="350dp"
+        android:layout_marginTop="-50dp"
+        android:layout_marginEnd="-80dp"
+        android:alpha="0.2"
+        android:contentDescription="@null"
+        android:src="@drawable/ic_pokeball_watermark"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="32dp"
+        android:text="@string/pokemon_name"
+        android:textColor="@color/white"
+        android:textSize="36sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/pokemon_number"
+        android:textColor="@color/black"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="@+id/tv_name"
+        app:layout_constraintTop_toBottomOf="@+id/tv_name" />
+
+    <ImageView
+        android:id="@+id/iv_star"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="24dp"
+        android:contentDescription="@null"
+        android:src="@drawable/ic_star_outline"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/view_card"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="200dp"
+        android:background="@drawable/bg_white_card"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/iv_pokemon"
+        android:layout_width="220dp"
+        android:layout_height="220dp"
+        android:layout_marginTop="80dp"
+        android:contentDescription="@string/pokemon_name"
+        android:src="@drawable/mew"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_type_badge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/bg_type_pill"
+        android:text="@string/type_psychic"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/iv_pokemon" />
+
+    <!-- Stats Section -->
+    <TextView
+        android:id="@+id/tv_height_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="24dp"
+        android:text="@string/label_height"
+        android:textColor="@color/text_red"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_type_badge" />
+
+    <TextView
+        android:id="@+id/tv_height_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:text="@string/value_height"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_height_label"
+        app:layout_constraintStart_toEndOf="@+id/tv_height_label"
+        app:layout_constraintTop_toTopOf="@+id/tv_height_label" />
+
+    <TextView
+        android:id="@+id/tv_ability_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="32dp"
+        android:text="@string/label_ability"
+        android:textColor="@color/text_red"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_type_badge" />
+
+    <TextView
+        android:id="@+id/tv_ability_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/value_ability"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@+id/tv_ability_label"
+        app:layout_constraintTop_toBottomOf="@+id/tv_ability_label" />
+
+    <TextView
+        android:id="@+id/tv_weight_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="@string/label_weight"
+        android:textColor="@color/text_red"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/tv_height_label"
+        app:layout_constraintTop_toBottomOf="@+id/tv_height_label" />
+
+    <TextView
+        android:id="@+id/tv_weight_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:text="@string/value_weight"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_weight_label"
+        app:layout_constraintStart_toEndOf="@+id/tv_weight_label"
+        app:layout_constraintTop_toTopOf="@+id/tv_weight_label" />
+
+    <TextView
+        android:id="@+id/tv_description"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="32dp"
+        android:gravity="center"
+        android:text="@string/pokemon_description"
+        android:textColor="@color/grey_text"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_weight_label" />
+
+    <!-- Bottom Navigation -->
+    <ImageView
+        android:id="@+id/iv_prev_pokemon"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginBottom="56dp"
+        android:contentDescription="@string/prev_pokemon"
+        android:src="@drawable/celebi"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/iv_prev_arrow"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginTop="8dp"
+        android:contentDescription="@null"
+        android:src="@drawable/ic_arrow_back"
+        app:layout_constraintStart_toStartOf="@+id/iv_prev_pokemon"
+        app:layout_constraintTop_toBottomOf="@+id/iv_prev_pokemon" />
+
+    <TextView
+        android:id="@+id/tv_prev_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:text="@string/prev_pokemon"
+        android:textColor="@color/grey_text"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_prev_arrow"
+        app:layout_constraintStart_toEndOf="@+id/iv_prev_arrow"
+        app:layout_constraintTop_toTopOf="@+id/iv_prev_arrow" />
+
+    <ImageView
+        android:id="@+id/iv_next_pokemon"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="56dp"
+        android:contentDescription="@string/next_pokemon"
+        android:src="@drawable/jirachi"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <ImageView
+        android:id="@+id/iv_next_arrow"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginTop="8dp"
+        android:contentDescription="@null"
+        android:src="@drawable/ic_arrow_forward"
+        app:layout_constraintEnd_toEndOf="@+id/iv_next_pokemon"
+        app:layout_constraintTop_toBottomOf="@+id/iv_next_pokemon" />
+
+    <TextView
+        android:id="@+id/tv_next_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="4dp"
+        android:text="@string/next_pokemon"
+        android:textColor="@color/grey_text"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_next_arrow"
+        app:layout_constraintEnd_toStartOf="@+id/iv_next_arrow"
+        app:layout_constraintTop_toTopOf="@+id/iv_next_arrow" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

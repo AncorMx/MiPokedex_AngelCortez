@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">MiPokedex_CortezAngel</string>
+    <string name="pokemon_name">Mew</string>
+    <string name="pokemon_number">#151</string>
+    <string name="type_psychic">Psíquico</string>
+    <string name="label_height">Altura</string>
+    <string name="label_weight">Peso</string>
+    <string name="label_ability">Habilidad</string>
+    <string name="value_height">0,4m</string>
+    <string name="value_weight">4,0kg</string>
+    <string name="value_ability">Sincronía</string>
+    <string name="pokemon_description">Dicen que Mew posee el mapa genético de todos los Pokémon. Puede hacerse invisible cuando quiere, por lo que pasa inadvertido aunque haya gente cerca.</string>
+    <string name="prev_pokemon">Celebi N.º 0251</string>
+    <string name="next_pokemon">Jirachi N.º 0385</string>
+</resources>

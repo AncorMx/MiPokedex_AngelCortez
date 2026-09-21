@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="pikachu_yellow">#F7D02C</color>
+    <color name="pokemon_red">#FB1B1B</color>
+    <color name="text_red">#B91C1C</color>
+    <color name="grey_text">#666666</color>
+    <color name="type_electric">#F7D02C</color>
+    <color name="mew_pink">#FFB6C1</color>
+    <color name="type_psychic">#F85888</color>
+</resources>
