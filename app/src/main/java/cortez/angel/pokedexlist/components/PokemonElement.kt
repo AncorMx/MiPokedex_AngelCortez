@@ -11,7 +11,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -98,11 +97,9 @@ fun FavoritePokemon(pokemon: Pokemon) {
     ) {
         Box {
             Box(
-                modifier = Modifier
-                    .border(
-                        border = BorderStroke(5.dp, gradientBrush),
-                        shape = CircleShape
-                    )
+                modifier = Modifier.border(
+                    border = BorderStroke(5.dp, gradientBrush)
+                )
             ) {
                 Image(
                     painter = painterResource(pokemon.image),
@@ -116,7 +113,7 @@ fun FavoritePokemon(pokemon: Pokemon) {
             NumberChip(
                 text = "${pokemon.number}",
                 colors = colors,
-                modifier = Modifier.align(Alignment.TopEnd)
+                modifier = Modifier.align(Alignment.BottomEnd)
             )
         }
 
