@@ -37,3 +37,13 @@ val pokemonList = listOf(
     Pokemon("Lucario", 448, "Lucha/Acero", "Al detectar el aura que emiten los demás, puede leer sus pensamientos y anticipar sus movimientos.", 1.2f, 54.0f, true, "Impasible", R.drawable.lucario),
     Pokemon("Mimikyu", 778, "Fantasma/Hada", "Su apariencia real es desconocida. Un investigador que vio debajo de su disfraz murió de terror.", 0.2f, 0.7f, false, "Disfraz", R.drawable.mimikyu)
 )
+
+fun getFavoritePokemons(): List<Pokemon> {
+    return pokemonList.filter {
+        it.favorite == true
+    }
+}
+
+fun getPokemonByNumber(id: Int): Pokemon {
+    return pokemonList.firstOrNull { it.number == id } ?: bulbasur
+}
