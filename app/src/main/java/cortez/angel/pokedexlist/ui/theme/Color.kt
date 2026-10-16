@@ -32,3 +32,7 @@ val Dragon = Color(0xFF3949AB)
 val Dark = Color(0xFF131310)
 val Ice = Color(0xFF9FA8DA)
 val Fairy = Color(0xFFEF9A9A)
+
+val SwitchThumbColor = Color(0xFF4CAF50)
+val SwitchTrackActiveColor = Color(0xFFA5D6A7)
+val SwitchTrackInactiveColor = Color(0xFFE0E0E0)

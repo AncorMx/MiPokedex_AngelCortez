@@ -3,6 +3,7 @@ package cortez.angel.pokedexlist.components
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -11,6 +12,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -27,11 +29,15 @@ import cortez.angel.pokedexlist.ui.theme.OffWhite
 import cortez.angel.pokedexlist.utilities.getColorByType
 
 @Composable
-fun PokemonRow(pokemon: Pokemon) {
+fun PokemonRow(
+    pokemon: Pokemon,
+    onClick: () -> Unit = {}
+) {
     val colors = getColorByType(pokemon.type)
     Row(
         modifier = Modifier
             .fillMaxWidth()
+            .clickable { onClick() }
             .padding(10.dp)
     ) {
         Image(
@@ -78,7 +84,10 @@ fun PokemonRow(pokemon: Pokemon) {
 }
 
 @Composable
-fun FavoritePokemon(pokemon: Pokemon) {
+fun FavoritePokemon(
+    pokemon: Pokemon,
+    onClick: () -> Unit = {}
+) {
     val colors = getColorByType(pokemon.type)
     val gradientBrush = Brush.sweepGradient(
         colors = listOf(
@@ -91,15 +100,19 @@ fun FavoritePokemon(pokemon: Pokemon) {
     )
 
     Column(
-        modifier = Modifier.padding(vertical = 15.dp, horizontal = 8.dp),
+        modifier = Modifier
+            .clickable { onClick() }
+            .padding(vertical = 15.dp, horizontal = 8.dp),
         verticalArrangement = Arrangement.spacedBy(10.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Box {
             Box(
-                modifier = Modifier.border(
-                    border = BorderStroke(5.dp, gradientBrush)
-                )
+                modifier = Modifier
+                    .border(
+                        border = BorderStroke(5.dp, gradientBrush),
+                        shape = CircleShape
+                    )
             ) {
                 Image(
                     painter = painterResource(pokemon.image),
@@ -113,7 +126,7 @@ fun FavoritePokemon(pokemon: Pokemon) {
             NumberChip(
                 text = "${pokemon.number}",
                 colors = colors,
-                modifier = Modifier.align(Alignment.BottomEnd)
+                modifier = Modifier.align(Alignment.TopEnd)
             )
         }
 
@@ -125,11 +138,16 @@ fun FavoritePokemon(pokemon: Pokemon) {
 }
 
 @Composable
-fun PokemonCell(pokemon: Pokemon) {
+fun PokemonCell(
+    pokemon: Pokemon,
+    onClick: () -> Unit = {}
+) {
     val colors = getColorByType(pokemon.type)
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = Modifier.padding(8.dp)
+        modifier = Modifier
+            .clickable { onClick() }
+            .padding(8.dp)
     ) {
         NumberChip(
             text = "${pokemon.number}",
@@ -139,7 +157,7 @@ fun PokemonCell(pokemon: Pokemon) {
             painter = painterResource(pokemon.image),
             contentDescription = "${pokemon.name} image",
             modifier = Modifier
-                .size(150.dp)
+                .size(120.dp)
                 .padding(10.dp)
         )
         Text(

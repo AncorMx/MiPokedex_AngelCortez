@@ -16,28 +16,47 @@ import cortez.angel.pokedexlist.data.pokemonList
 import cortez.angel.pokedexlist.domain.Pokemon
 
 @Composable
-fun MenuPokedex(pokemonList: List<Pokemon>) {
-    LazyColumn {
+fun MenuPokedex(
+    pokemonList: List<Pokemon>,
+    modifier: Modifier = Modifier,
+    onPokemonClick: (Int) -> Unit = {}
+) {
+    LazyColumn(modifier = modifier) {
         items(pokemonList) { pokemon ->
-            PokemonRow(pokemon)
+            PokemonRow(
+                pokemon = pokemon,
+                onClick = { onPokemonClick(pokemon.number) }
+            )
         }
     }
 }
 
 @Composable
-fun FavoritesRow(favoriteList: List<Pokemon>) {
+fun FavoritesRow(
+    favoriteList: List<Pokemon>,
+    modifier: Modifier = Modifier,
+    onPokemonClick: (Int) -> Unit = {}
+) {
     LazyRow(
         horizontalArrangement = Arrangement.spacedBy(8.dp),
-        contentPadding = PaddingValues(horizontal = 10.dp)
+        contentPadding = PaddingValues(horizontal = 10.dp),
+        modifier = modifier
     ) {
         items(favoriteList) { pokemon ->
-            FavoritePokemon(pokemon)
+            FavoritePokemon(
+                pokemon = pokemon,
+                onClick = { onPokemonClick(pokemon.number) }
+            )
         }
     }
 }
 
 @Composable
-fun PokedexGrid(pokemonList: List<Pokemon>, modifier: Modifier = Modifier) {
+fun PokedexGrid(
+    pokemonList: List<Pokemon>,
+    modifier: Modifier = Modifier,
+    onPokemonClick: (Int) -> Unit = {}
+) {
     LazyVerticalGrid(
         columns = GridCells.Fixed(3),
         contentPadding = PaddingValues(horizontal = 5.dp, vertical = 20.dp),
@@ -46,7 +65,10 @@ fun PokedexGrid(pokemonList: List<Pokemon>, modifier: Modifier = Modifier) {
         modifier = modifier
     ) {
         items(pokemonList) { pokemon ->
-            PokemonCell(pokemon)
+            PokemonCell(
+                pokemon = pokemon,
+                onClick = { onPokemonClick(pokemon.number) }
+            )
         }
     }
 }
