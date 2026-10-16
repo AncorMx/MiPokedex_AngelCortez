@@ -7,7 +7,7 @@ data class Pokemon(
     val description: String,
     val height: Float,
     val weight: Float,
-    val favorite: Boolean,
+    var favorite: Boolean,
     val ability: String,
     val image: Int
 )

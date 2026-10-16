@@ -29,7 +29,6 @@ import cortez.angel.pokedexlist.R
 import cortez.angel.pokedexlist.components.FavoritesRow
 import cortez.angel.pokedexlist.components.MenuPokedex
 import cortez.angel.pokedexlist.components.PokedexGrid
-import cortez.angel.pokedexlist.data.getFavoritePokemons
 import cortez.angel.pokedexlist.data.pokemonList
 import cortez.angel.pokedexlist.ui.theme.DarkGray
 import cortez.angel.pokedexlist.ui.theme.OffWhite
@@ -37,10 +36,12 @@ import cortez.angel.pokedexlist.ui.theme.PokedexListTheme
 import cortez.angel.pokedexlist.ui.theme.SwitchThumbColor
 import cortez.angel.pokedexlist.ui.theme.SwitchTrackActiveColor
 import cortez.angel.pokedexlist.ui.theme.SwitchTrackInactiveColor
+import cortez.angel.pokedexlist.viewModel.PokemonViewModel
 
 @Composable
 fun MenuPokedexScreen(
     innerPadding: PaddingValues,
+    viewModel: PokemonViewModel,
     onNavigateToDetail: (Int) -> Unit = {},
     onNavigateToHunt: () -> Unit = {}
 ) {
@@ -59,7 +60,7 @@ fun MenuPokedexScreen(
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
             Text(
-                text = "Pokédex",
+                text = "Mis Favoritos",
                 style = MaterialTheme.typography.titleLarge
             )
             Button(onClick = onNavigateToHunt) {
@@ -67,14 +68,8 @@ fun MenuPokedexScreen(
             }
         }
 
-        Text(
-            text = "Mis Favoritos",
-            style = MaterialTheme.typography.labelLarge,
-            modifier = Modifier.padding(start = 16.dp, top = 8.dp, bottom = 4.dp)
-        )
-
         FavoritesRow(
-            favoriteList = getFavoritePokemons(),
+            favoriteList = viewModel.getFavoritePokemon(),
             onPokemonClick = onNavigateToDetail
         )
 
@@ -89,7 +84,7 @@ fun MenuPokedexScreen(
         ) {
             Text(
                 text = "Todos mis pokemones",
-                style = MaterialTheme.typography.labelLarge
+                style = MaterialTheme.typography.titleLarge
             )
 
             Switch(
@@ -134,6 +129,9 @@ fun MenuPokedexScreen(
 @Composable
 fun ScreenPreview() {
     PokedexListTheme {
-        MenuPokedexScreen(innerPadding = PaddingValues(10.dp, 15.dp))
+        MenuPokedexScreen(
+            innerPadding = PaddingValues(10.dp, 15.dp),
+            viewModel = remember { PokemonViewModel() }
+        )
     }
 }
