@@ -1,5 +1,6 @@
 package cortez.angel.pokedexlist.screens
 
+import androidx.compose.material3.Icon
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -198,9 +199,13 @@ private fun LoginForm(
 
 @Composable
 private fun PasswordVisibilityButton(visible: Boolean, onClick: () -> Unit) {
-    // using generic icons if specific drawables not available
     IconButton(onClick = onClick) {
-        Text(text = if (visible) "Ocultar" else "Mostrar")
+        Icon(
+            painter = painterResource(
+                if (visible) R.drawable.ic_visibility_off else R.drawable.ic_visibility,
+            ),
+            contentDescription = if (visible) "Ocultar" else "Mostrar",
+        )
     }
 }
 
