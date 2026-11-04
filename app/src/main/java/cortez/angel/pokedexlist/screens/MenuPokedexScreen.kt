@@ -38,13 +38,21 @@ import cortez.angel.pokedexlist.ui.theme.SwitchThumbColor
 import cortez.angel.pokedexlist.ui.theme.SwitchTrackActiveColor
 import cortez.angel.pokedexlist.ui.theme.SwitchTrackInactiveColor
 
+import cortez.angel.pokedexlist.viewModel.PokemonViewModel
+import cortez.angel.pokedexlist.viewModel.UserViewModel
+
 @Composable
 fun MenuPokedexScreen(
     innerPadding: PaddingValues,
+    userViewModel: UserViewModel? = null,
+    pokemonViewModel: PokemonViewModel? = null,
     onNavigateToDetail: (Int) -> Unit = {},
-    onNavigateToHunt: () -> Unit = {}
+    onNavigateToHunt: () -> Unit = {},
+    onLogoutClick: () -> Unit = {}
 ) {
-    var isGrid by remember { mutableStateOf(false) }
+    val isGrid = userViewModel?.gridDisplay ?: false
+    val pokemons = pokemonViewModel?.pokemons ?: pokemonList
+    val favorites = pokemonViewModel?.favorites ?: getFavoritePokemons()
 
     Column(
         modifier = Modifier
@@ -62,8 +70,19 @@ fun MenuPokedexScreen(
                 text = "Pokédex",
                 style = MaterialTheme.typography.titleLarge
             )
-            Button(onClick = onNavigateToHunt) {
-                Text("Catch Me")
+            Row {
+                Button(
+                    onClick = {
+                        userViewModel?.logout()
+                        onLogoutClick()
+                    },
+                    modifier = Modifier.padding(end = 8.dp)
+                ) {
+                    Text("Cerrar Sesión")
+                }
+                Button(onClick = onNavigateToHunt) {
+                    Text("Catch Me")
+                }
             }
         }
 
@@ -74,7 +93,7 @@ fun MenuPokedexScreen(
         )
 
         FavoritesRow(
-            favoriteList = getFavoritePokemons(),
+            favoriteList = favorites,
             onPokemonClick = onNavigateToDetail
         )
 
@@ -94,7 +113,7 @@ fun MenuPokedexScreen(
 
             Switch(
                 checked = isGrid,
-                onCheckedChange = { isGrid = it },
+                onCheckedChange = { userViewModel?.changeDisplay(it) },
                 thumbContent = {
                     val iconRes = if (isGrid) R.drawable.ic_grid_view else R.drawable.ic_list_view
                     Icon(
@@ -116,13 +135,13 @@ fun MenuPokedexScreen(
 
         if (isGrid) {
             PokedexGrid(
-                pokemonList = pokemonList,
+                pokemonList = pokemons,
                 modifier = Modifier.weight(1f),
                 onPokemonClick = onNavigateToDetail
             )
         } else {
             MenuPokedex(
-                pokemonList = pokemonList,
+                pokemonList = pokemons,
                 modifier = Modifier.weight(1f),
                 onPokemonClick = onNavigateToDetail
             )

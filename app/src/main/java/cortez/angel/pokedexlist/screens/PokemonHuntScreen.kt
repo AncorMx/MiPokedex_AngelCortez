@@ -22,9 +22,13 @@ import cortez.angel.pokedexlist.viewModel.PokemonViewModel
 @Composable
 fun PokemonHuntScreen(
     innerPadding: PaddingValues,
-    viewModel: PokemonViewModel = PokemonViewModel(),
+    pokemonViewModel: PokemonViewModel? = null,
     onBack: () -> Unit = {}
 ) {
+    val pokedexState = pokemonViewModel?.pokedexState
+    val wildPokemon = pokedexState?.wildPokemon
+    val isGone = pokedexState?.escaped != null
+    
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -43,13 +47,13 @@ fun PokemonHuntScreen(
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        Button(onClick = { viewModel.searchPokemon() }) {
+        Button(onClick = { pokemonViewModel?.searchPokemon() }) {
             Text("Buscar Pokémon Salvaje")
         }
 
         Spacer(modifier = Modifier.height(20.dp))
 
-        viewModel.wildPokemon?.let { pokemon ->
+        wildPokemon?.let { pokemon ->
             Text(
                 text = "¡Apareció un ${pokemon.name} salvaje!",
                 style = MaterialTheme.typography.titleMedium
@@ -57,12 +61,12 @@ fun PokemonHuntScreen(
             Spacer(modifier = Modifier.height(10.dp))
             PokemonCell(pokemon = pokemon)
             Spacer(modifier = Modifier.height(10.dp))
-            Button(onClick = { viewModel.capturePokemon() }) {
+            Button(onClick = { pokemonViewModel?.capturePokemon() }) {
                 Text("Capturar a ${pokemon.name}")
             }
         }
 
-        if (viewModel.isGone) {
+        if (isGone) {
             Spacer(modifier = Modifier.height(10.dp))
             Text(
                 text = "¡El Pokémon escapó!",

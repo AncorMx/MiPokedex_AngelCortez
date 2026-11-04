@@ -21,7 +21,9 @@ import cortez.angel.pokedexlist.ui.theme.Psych
 import cortez.angel.pokedexlist.ui.theme.Rock
 import cortez.angel.pokedexlist.ui.theme.Water
 
+// Obtiene el color de fondo y de texto correspondiente a cada tipo de Pokemon
 fun getColorByType(type: String): Pair<Color, Color> {
+    // Si tiene dos tipos (ej. Planta/Veneno) usamos el primero como principal
     val primaryType = type.split("/").firstOrNull()?.trim()?.lowercase() ?: ""
 
     val (bgColor, isLight) = when (primaryType) {

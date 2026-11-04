@@ -33,127 +33,124 @@ import cortez.angel.pokedexlist.data.getPokemonByNumber
 import cortez.angel.pokedexlist.ui.theme.PokedexListTheme
 import cortez.angel.pokedexlist.utilities.getColorByType
 
+import cortez.angel.pokedexlist.viewModel.PokemonViewModel
+import cortez.angel.pokedexlist.data.bulbasur
+
+import cortez.angel.pokedexlist.components.PokedexCard
+import cortez.angel.pokedexlist.components.PokedexHeader
+import cortez.angel.pokedexlist.components.PokedexNavigation
+import cortez.angel.pokedexlist.components.PokemonStats
+import cortez.angel.pokedexlist.components.TypeChips
+import androidx.compose.foundation.layout.BoxScope
+import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.offset
+import androidx.compose.foundation.layout.statusBarsPadding
+import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.ui.BiasAlignment
+import androidx.compose.ui.text.style.TextAlign
+import cortez.angel.pokedexlist.R
+import cortez.angel.pokedexlist.ui.theme.Dimens
+import cortez.angel.pokedexlist.domain.Pokemon
+import cortez.angel.pokedexlist.viewModel.PokemonDetailState
+
+private const val CARD_TOP = 0.29f
+private const val IMAGE_TOP = 0.10f
+private const val IMAGE_BOTTOM = 0.335f
+
+private val DescriptionAlignment = BiasAlignment.Vertical(-0.5f)
+
 @Composable
 fun PokemonDetailScreen(
     innerPaddingValues: PaddingValues,
     pokemonId: Int,
-    onBack: () -> Unit = {}
+    pokemonViewModel: PokemonViewModel,
+    onBack: () -> Unit = {},
+    onNavigateToDetail: (Int) -> Unit = {}
 ) {
-    val pokemon = getPokemonByNumber(pokemonId)
-    val colors = getColorByType(pokemon.type)
+    val detail = pokemonViewModel.detailOf(pokemonId)
 
-    Column(
+    Box(
         modifier = Modifier
             .fillMaxSize()
+            .background(MaterialTheme.colorScheme.background)
             .padding(innerPaddingValues)
-            .padding(16.dp),
-        horizontalAlignment = Alignment.CenterHorizontally
+            .statusBarsPadding(),
     ) {
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            Button(onClick = onBack) {
-                Text("Volver")
-            }
-
-            NumberChip(
-                text = "#${pokemon.number}",
-                colors = colors
+        if (detail == null) {
+            Text(
+                text = "Pokemon no encontrado",
+                modifier = Modifier.align(Alignment.Center),
+                color = MaterialTheme.colorScheme.onBackground,
+                style = MaterialTheme.typography.titleLarge,
             )
-        }
-
-        Spacer(modifier = Modifier.height(16.dp))
-
-        Box(
-            modifier = Modifier
-                .size(200.dp)
-                .clip(RoundedCornerShape(100.dp))
-                .background(colors.first.copy(alpha = 0.3f)),
-            contentAlignment = Alignment.Center
-        ) {
-            Image(
-                painter = painterResource(pokemon.image),
-                contentDescription = "${pokemon.name} image",
-                modifier = Modifier.size(160.dp)
+        } else {
+            PokemonDetail(
+                pokemon = detail.pokemon,
+                previous = detail.previous,
+                next = detail.next,
+                onFavoriteClick = { pokemonViewModel.toggleFavorite(detail.pokemon.number) },
+                onNeighborClick = { neighbor -> onNavigateToDetail(neighbor.number) },
             )
-        }
-
-        Spacer(modifier = Modifier.height(16.dp))
-
-        Text(
-            text = pokemon.name,
-            style = MaterialTheme.typography.headlineMedium,
-            fontWeight = FontWeight.Bold
-        )
-
-        Spacer(modifier = Modifier.height(8.dp))
-
-        Card(
-            modifier = Modifier.fillMaxWidth(),
-            colors = CardDefaults.cardColors(containerColor = colors.first.copy(alpha = 0.15f))
-        ) {
-            Column(
-                modifier = Modifier.padding(16.dp),
-                verticalArrangement = Arrangement.spacedBy(8.dp)
-            ) {
-                Text(
-                    text = "Tipo: ${pokemon.type}",
-                    fontWeight = FontWeight.SemiBold,
-                    fontSize = 16.sp
-                )
-                Text(
-                    text = "Habilidad: ${pokemon.ability}",
-                    fontSize = 14.sp
-                )
-                Text(
-                    text = pokemon.description,
-                    fontSize = 14.sp
-                )
-            }
-        }
-
-        Spacer(modifier = Modifier.height(16.dp))
-
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceEvenly
-        ) {
-            Card(
-                modifier = Modifier.weight(1f).padding(end = 8.dp)
-            ) {
-                Column(
-                    modifier = Modifier.padding(12.dp),
-                    horizontalAlignment = Alignment.CenterHorizontally
-                ) {
-                    Text("Alto", fontWeight = FontWeight.Bold)
-                    Text("${pokemon.height} m")
-                }
-            }
-
-            Card(
-                modifier = Modifier.weight(1f).padding(start = 8.dp)
-            ) {
-                Column(
-                    modifier = Modifier.padding(12.dp),
-                    horizontalAlignment = Alignment.CenterHorizontally
-                ) {
-                    Text("Peso", fontWeight = FontWeight.Bold)
-                    Text("${pokemon.weight} kg")
-                }
-            }
         }
     }
 }
 
-@Preview(showBackground = true)
 @Composable
-fun PokemonDetailPreview() {
-    PokedexListTheme {
-        PokemonDetailScreen(
-            innerPaddingValues = PaddingValues(),
-            pokemonId = 1
+private fun BoxScope.PokemonDetail(
+    pokemon: Pokemon,
+    previous: Pokemon,
+    next: Pokemon,
+    onFavoriteClick: () -> Unit,
+    onNeighborClick: (Pokemon) -> Unit,
+) {
+    Image(
+        painter = painterResource(R.drawable.ic_pokeball),
+        contentDescription = null,
+        modifier = Modifier
+            .align(Alignment.TopEnd)
+            .offset(x = Dimens.PokeballOffsetX, y = Dimens.PokeballOffsetY)
+            .size(Dimens.PokeballSize),
+    )
+    PokedexCard(
+        modifier = Modifier
+            .align(Alignment.BottomCenter)
+            .fillMaxHeight(1f - CARD_TOP),
+    ) {
+        TypeChips(pokemon.type, Modifier.padding(top = Dimens.MarginTypeTop))
+        PokemonStats(pokemon, Modifier.padding(top = Dimens.MarginMedium))
+        Text(
+            text = pokemon.description,
+            modifier = Modifier
+                .weight(1f)
+                .padding(horizontal = Dimens.MarginDescription)
+                .wrapContentHeight(DescriptionAlignment),
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
+            textAlign = TextAlign.Center,
+            style = MaterialTheme.typography.titleLarge,
         )
+        PokedexNavigation(previous = previous, next = next, onPokemonClick = onNeighborClick)
+    }
+    PokedexHeader(pokemon, onFavoriteClick)
+    PokemonPortrait(pokemon)
+}
+
+@Composable
+private fun PokemonPortrait(pokemon: Pokemon, modifier: Modifier = Modifier) {
+    Column(
+        modifier = modifier.fillMaxSize(),
+        horizontalAlignment = Alignment.CenterHorizontally,
+    ) {
+        Spacer(Modifier.weight(IMAGE_TOP))
+        Image(
+            painter = painterResource(pokemon.image),
+            contentDescription = "Imagen de ${pokemon.name}",
+            modifier = Modifier
+                .weight(IMAGE_BOTTOM - IMAGE_TOP)
+                .aspectRatio(1f),
+        )
+        Spacer(Modifier.weight(1f - IMAGE_BOTTOM))
     }
 }
+
+
