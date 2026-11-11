@@ -3,47 +3,28 @@ package cortez.angel.pokedexlist.data
 import cortez.angel.pokedexlist.R
 import cortez.angel.pokedexlist.domain.Pokemon
 
-val bulbasur = Pokemon(
-    "Bulbasaur",
-    1,
-    "Planta/Veneno",
-    "Lleva una semilla en la espalda desde que nace, la cual crece gradualmente con él.",
-    0.7f,
-    6.9f,
-    false,
-    "Espesura",
-    R.drawable.bulbasaur
+/** Un solo Pokémon, para los Previews de los componentes. */
+val bulbasaur = Pokemon(
+    name = "Bulbasaur",
+    number = 1,
+    type = "Grass/Poison",
+    description = "There is a plant seed on its back from the day this Pokémon is born.",
+    height = 0.7f,
+    weight = 6.9f,
+    favorite = false,
+    ability = "Overgrow",
+    image = R.drawable.bulbasaur,
 )
 
 val pokemonList = listOf(
-    Pokemon(
-        "Bulbasaur",
-        1,
-        "Planta/Veneno",
-        "Lleva una semilla en la espalda desde que nace, la cual crece gradualmente con él.",
-        0.7f,
-        6.9f,
-        false,
-        "Espesura",
-        R.drawable.bulbasaur
-    ),
-    Pokemon("Charmander", 4, "Fuego", "La llama en su cola indica la fuerza de su vida. Arde con más fuerza si está sano.", 0.6f, 8.5f, true, "Mar Llamas", R.drawable.charmander),
-    Pokemon("Squirtle", 7, "Agua", "Tras nacer, su lomo se hincha y se endurece formando un resistente caparazón.", 0.5f, 9.0f, false, "Torrente", R.drawable.squirtle),
-    Pokemon("Pikachu", 25, "Eléctrico", "Cuando se reúnen varios de estos Pokémon, su electricidad puede acumularse y provocar tormentas.", 0.4f, 6.0f, true, "Electricidad Estática", R.drawable.pikachu),
-    Pokemon("Jigglypuff", 39, "Normal/Hada", "Atrapa a sus enemigos con sus grandes ojos y los adormece cantando una melodía agradable.", 0.5f, 5.5f, false, "Gran Encanto", R.drawable.jigglypuff),
-    Pokemon("Gengar", 94, "Fantasma/Veneno", "Bajo la luz de la luna llena, le gusta imitar las sombras de la gente y reírse de sus sustos.", 1.5f, 40.5f, true, "Cuerpo Maldito", R.drawable.gengar),
-    Pokemon("Snorlax", 143, "Normal", "Su estómago es tan fuerte que puede digerir incluso comida mohosa o podrida sin sufrir daño.", 2.1f, 460.0f, false, "Inmunidad", R.drawable.snorlax),
-    Pokemon("Mewtwo", 150, "Psíquico", "Fue creado por un científico tras años de horribles experimentos genéticos e ingeniería de ADN.", 2.0f, 122.0f, true, "Presión", R.drawable.mewtwo),
-    Pokemon("Lucario", 448, "Lucha/Acero", "Al detectar el aura que emiten los demás, puede leer sus pensamientos y anticipar sus movimientos.", 1.2f, 54.0f, true, "Impasible", R.drawable.lucario),
-    Pokemon("Mimikyu", 778, "Fantasma/Hada", "Su apariencia real es desconocida. Un investigador que vio debajo de su disfraz murió de terror.", 0.2f, 0.7f, false, "Disfraz", R.drawable.mimikyu)
+    bulbasaur,
+    Pokemon("Charmander", 4, "Fire", "The flame on its tail shows the strength of its life force.", 0.6f, 8.5f, true, "Blaze", R.drawable.charmander),
+    Pokemon("Squirtle", 7, "Water", "After birth, its back swells and hardens into a shell.", 0.5f, 9.0f, false, "Torrent", R.drawable.squirtle),
+    Pokemon("Pikachu", 25, "Electric", "When several of these Pokémon gather, their electricity could build and cause lightning storms.", 0.4f, 6.0f, true, "Static", R.drawable.pikachu),
+    Pokemon("Jigglypuff", 39, "Normal/Fairy", "Uses its alluring eyes to enrapture its foe, then sings a pleasant melody to lull them to sleep.", 0.5f, 5.5f, false, "Cute Charm", R.drawable.jigglypuff),
+    Pokemon("Gengar", 94, "Ghost/Poison", "Under a full moon, this Pokémon likes to mimic the shadows of people and laugh at their fright.", 1.5f, 40.5f, true, "Cursed Body", R.drawable.gengar),
+    Pokemon("Snorlax", 143, "Normal", "Its stomach is said to be so strong that it can even eat moldy or rotten food.", 2.1f, 460.0f, false, "Immunity", R.drawable.snorlax),
+    Pokemon("Mewtwo", 150, "Psychic", "It was created by a scientist after years of horrific gene-splicing and DNA engineering experiments.", 2.0f, 122.0f, true, "Pressure", R.drawable.mewtwo),
+    Pokemon("Lucario", 448, "Fighting/Steel", "By catching the aura emanating from others, it can read their thoughts and movements.", 1.2f, 54.0f, true, "Steadfast", R.drawable.lucario),
+    Pokemon("Mimikyu", 778, "Ghost/Fairy", "Its actual appearance is unknown. A scholar who saw what was under its rag overwhelmed by terror and died.", 0.2f, 0.7f, false, "Disguise", R.drawable.mimikyu),
 )
-
-fun getFavoritePokemons(): List<Pokemon> {
-    return pokemonList.filter {
-        it.favorite == true
-    }
-}
-
-fun getPokemonByNumber(id: Int): Pokemon {
-    return pokemonList.firstOrNull { it.number == id } ?: bulbasur
-}

@@ -1,5 +1,8 @@
 package cortez.angel.pokedexlist.domain
 
+import androidx.annotation.DrawableRes
+
+/** Pokémon con todos los datos que muestra la lista de la Pokédex. */
 data class Pokemon(
     val name: String,
     val number: Int,
@@ -9,5 +12,5 @@ data class Pokemon(
     val weight: Float,
     val favorite: Boolean,
     val ability: String,
-    val image: Int
+    @DrawableRes val image: Int,
 )

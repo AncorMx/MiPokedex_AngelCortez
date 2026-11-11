@@ -1,5 +1,7 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
-
-    <style name="Theme.PokedexList" parent="android:Theme.Material.Light.NoActionBar" />
+    <!-- Los colores y textos de la pantalla viven en ui/theme (Compose). Este tema solo
+         pinta la ventana de amarillo para que no haya un destello blanco al abrir la app. -->
+    <style name="Theme.MiPokedex" parent="android:Theme.Material.Light.NoActionBar">
+        <item name="android:windowBackground">@color/pokedex_yellow</item>
+    </style>
 </resources>

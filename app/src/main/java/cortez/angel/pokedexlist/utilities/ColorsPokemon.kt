@@ -19,34 +19,33 @@ import cortez.angel.pokedexlist.ui.theme.OffWhite
 import cortez.angel.pokedexlist.ui.theme.Poison
 import cortez.angel.pokedexlist.ui.theme.Psych
 import cortez.angel.pokedexlist.ui.theme.Rock
+import cortez.angel.pokedexlist.ui.theme.Steel
 import cortez.angel.pokedexlist.ui.theme.Water
 
-// Obtiene el color de fondo y de texto correspondiente a cada tipo de Pokemon
-fun getColorByType(type: String): Pair<Color, Color> {
-    // Si tiene dos tipos (ej. Planta/Veneno) usamos el primero como principal
-    val primaryType = type.split("/").firstOrNull()?.trim()?.lowercase() ?: ""
-
-    val (bgColor, isLight) = when (primaryType) {
-        "electric", "eléctrico", "electrico" -> Pair(Electric, true)
-        "fairy", "hada" -> Pair(Fairy, true)
-        "ice", "hielo" -> Pair(Ice, true)
-        "grass", "planta" -> Pair(Grass, false)
-        "fire", "fuego" -> Pair(Fire, false)
-        "water", "agua" -> Pair(Water, false)
-        "normal" -> Pair(Normal, false)
-        "bug", "bicho" -> Pair(Bug, false)
-        "poison", "veneno" -> Pair(Poison, false)
-        "ground", "tierra" -> Pair(Ground, false)
-        "rock", "roca" -> Pair(Rock, false)
-        "flying", "volador" -> Pair(Flying, false)
-        "fight", "fighting", "lucha" -> Pair(Fight, false)
-        "psych", "psychic", "psíquico", "psiquico" -> Pair(Psych, false)
-        "ghost", "fantasma" -> Pair(Ghost, false)
-        "dragon", "dragón" -> Pair(Dragon, false)
-        "dark", "siniestro" -> Pair(Dark, false)
-        else -> Pair(Normal, false)
+/**
+ * Color del tipo de Pokémon y el color del texto que va encima:
+ * OffWhite si el color del tipo es oscuro, DarkGray si es claro.
+ */
+fun getColorByType(type: String): Pair<Color, Color> =
+    // Con dos tipos ("Grass/Poison") manda el primero
+    when (type.substringBefore('/')) {
+        "Normal" -> Normal to OffWhite
+        "Water" -> Water to OffWhite
+        "Fire" -> Fire to OffWhite
+        "Psych", "Psychic" -> Psych to OffWhite
+        "Ghost" -> Ghost to OffWhite
+        "Bug" -> Bug to OffWhite
+        "Poison" -> Poison to OffWhite
+        "Grass" -> Grass to OffWhite
+        "Ground" -> Ground to OffWhite
+        "Rock" -> Rock to OffWhite
+        "Dragon" -> Dragon to OffWhite
+        "Dark" -> Dark to OffWhite
+        "Steel" -> Steel to OffWhite
+        "Electric" -> Electric to DarkGray
+        "Fairy" -> Fairy to DarkGray
+        "Fight", "Fighting" -> Fight to DarkGray
+        "Flying" -> Flying to DarkGray
+        "Ice" -> Ice to DarkGray
+        else -> Normal to OffWhite
     }
-
-    val textColor = if (isLight) DarkGray else OffWhite
-    return Pair(bgColor, textColor)
-}

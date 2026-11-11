@@ -1,23 +1,30 @@
 package cortez.angel.pokedexlist
 
+import android.graphics.Color
 import android.os.Bundle
 import androidx.activity.ComponentActivity
+import androidx.activity.SystemBarStyle
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
-import cortez.angel.pokedexlist.navigation.MyApp
-import cortez.angel.pokedexlist.ui.theme.PokedexListTheme
+import cortez.angel.pokedexlist.ui.navigation.PokedexNavHost
+import cortez.angel.pokedexlist.ui.theme.MiPokedexTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
+        val lightBars = SystemBarStyle.light(Color.TRANSPARENT, Color.TRANSPARENT)
+        enableEdgeToEdge(statusBarStyle = lightBars, navigationBarStyle = lightBars)
         setContent {
-            PokedexListTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    MyApp(innerPaddingValues = innerPadding)
+            MiPokedexTheme {
+                Scaffold(
+                    modifier = Modifier.fillMaxSize(),
+                    containerColor = MaterialTheme.colorScheme.surface,
+                ) { innerPadding ->
+                    PokedexNavHost(innerPadding)
                 }
             }
         }
