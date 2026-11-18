@@ -42,7 +42,8 @@ import cortez.angel.pokedexlist.ui.theme.SwitchTrackInactiveColor
 fun MenuPokedexScreen(
     innerPadding: PaddingValues,
     onNavigateToDetail: (Int) -> Unit = {},
-    onNavigateToHunt: () -> Unit = {}
+    onNavigateToHunt: () -> Unit = {},
+    onNavigateToAdd: () -> Unit = {}
 ) {
     var isGrid by remember { mutableStateOf(false) }
 
@@ -62,8 +63,14 @@ fun MenuPokedexScreen(
                 text = "Pokédex",
                 style = MaterialTheme.typography.titleLarge
             )
-            Button(onClick = onNavigateToHunt) {
-                Text("Catch Me")
+            Row {
+                Button(onClick = onNavigateToHunt) {
+                    Text("Catch Me")
+                }
+                Spacer(modifier = Modifier.size(8.dp))
+                Button(onClick = onNavigateToAdd) {
+                    Text("Add")
+                }
             }
         }
 

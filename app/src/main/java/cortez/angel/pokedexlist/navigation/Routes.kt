@@ -10,3 +10,6 @@ data class PokemonDetail(val pokemon: Int)
 
 @Serializable
 object PokemonHunt
+
+@Serializable
+object AddPokemon

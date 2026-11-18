@@ -6,6 +6,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
+import cortez.angel.pokedexlist.screens.AddPokemonScreen
 import cortez.angel.pokedexlist.screens.MenuPokedexScreen
 import cortez.angel.pokedexlist.screens.PokemonDetailScreen
 import cortez.angel.pokedexlist.screens.PokemonHuntScreen
@@ -22,6 +23,9 @@ fun MyApp(innerPaddingValues: PaddingValues) {
                 },
                 onNavigateToHunt = {
                     navController.navigate(PokemonHunt)
+                },
+                onNavigateToAdd = {
+                    navController.navigate(AddPokemon)
                 }
             )
         }
@@ -39,6 +43,9 @@ fun MyApp(innerPaddingValues: PaddingValues) {
                 innerPadding = innerPaddingValues,
                 onBack = { navController.popBackStack() }
             )
+        }
+        composable<AddPokemon> {
+            AddPokemonScreen(innerPadding = innerPaddingValues)
         }
     }
 }
